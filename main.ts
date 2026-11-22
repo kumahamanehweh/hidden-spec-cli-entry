@@ -746,7 +746,8 @@ function parseV4a(lines: string[]): V4aSection[] {
           open = false;
           cur = null;
         } else if (l.startsWith('@@')) {
-          startChunk(l.slice(2).trim());
+          const a = l.slice(2).trim();
+          startChunk(a === '' ? null : a);
         } else if (l.startsWith(' ') || l.startsWith('-') || l.startsWith('+') || l === '') {
           if (!open) {
             if (chunks.length > 0) throw new PatchError(`error: parse ${no}`);
